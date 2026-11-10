@@ -1,7 +1,6 @@
 # Reefer-Spitzenlast: Wie lange darf der Strom pausieren? – Streamlit-Demo
 
-<!-- TODO nach dem Deploy: direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-reefer-spitzenlast-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-reefer-spitzenlast-demo.streamlit.app/)**
 
 Interaktive Fall-Demo zu **Kühlcontainern (Reefern) im Block** über 24 Stunden: Viele Reefer kühlen gleichzeitig, der Block zieht eine hohe **Spitze**, und viele Stromversorger rechnen nach der höchsten Spitze
 ab. Die Demo beantwortet: **Wie weit lässt sich die Spitze senken, ohne dass die Ware wärmer wird, als es sicher ist, und welche Regel für den Strom holt wie viel davon heraus?**
