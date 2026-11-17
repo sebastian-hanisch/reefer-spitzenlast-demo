@@ -71,7 +71,33 @@ Die Spalte „Test“ nennt die Funktion in `tests/test_claims.py` (Band oder ex
 - **Reserve ist eine Annahme, keine Messung.** Wie viel Erwärmung eine Ware verträgt, hängt von der Ware ab; die Demo zeigt nur, was jede Reserve an Spitze kostet oder bringt. Keep it cool nennt für Strom reihum einen Temperaturanstieg im Reefer, der mit kürzeren Slots kleiner wird, und ein Produktrisiko; hier hält diese Regel bei 16 °C Tagesmittel mit 0,5 K Reserve in 13 von 20 Blöcken, die Modelle sind nicht vergleichbar (anderes Thermostat, andere Daten).
 - **Die Leistungsgrenze ist eine Regel, kein Optimum.** Sie wird an der unteren Schranke und, bei bis zu fünf Reefern, am exakten Ein/Aus-Plan gemessen; bei größeren Blöcken bleibt die Lücke offen (Median 16 % zur Schranke mit 0,5 K Reserve, die Schranke ist
   nicht erreichbar, weil Ein/Aus ganzzahlig ist: eine **Deutung**, nicht gemessen).
-- **Nicht im Modell:** Stellplatzabhängigkeit des Verbrauchs (Sonne je Position, Stapelebene), Reefer-Racks als eigenes Lagerkonzept, Strompreisverlauf und Lastverschiebung über den Tag, Netzanschlussgrenzen mehrerer Blöcke.
+- **Nicht im Modell:** Stellplatzabhängigkeit des Verbrauchs (Sonne je Position, Stapelebene), Reefer-Racks als eigenes Lagerkonzept, Strompreisverlauf und Lastverschiebung über den Tag, Netzanschlussgrenzen mehrerer Blöcke (Tang u. a. 2025 planen diese Dinge zusammen, siehe „Einordnung: Tang u. a. (2025)“).
+
+## Einordnung: Tang u. a. (2025)
+
+Tang, G., Zhao, Z., Schulte, F., Iris, Ç. (2025): *Smart charging with demand response and energy peak shaving for reefer containers with Internet-of-Things.* International Journal of Production Research 63(20), 7460–7485,
+[doi:10.1080/00207543.2025.2499868](https://doi.org/10.1080/00207543.2025.2499868) (Open Access). **Gelesen:** der gesamte Fließtext einschließlich Fazit und die Tabellen 1 bis 4 aus dem PDF. **Nicht gelesen:** die Abbildungen (u. a. Abbildung 11 mit dem Temperaturverlauf zweier Reefer) und die Tabellen 5 und 6 (Dachbeschattung); deren Zahlen stehen hier nur, soweit der Fließtext sie nennt. Die Startwerte der Reefer (Anteil am oberen Rand) nennt die Arbeit nicht.
+Alle Angaben zur Arbeit stehen dort und sind hier **nicht nachgerechnet**.
+
+**Was die Arbeit macht.** Ein Mehrperioden-Plan für alle Reefer eines Yards: je Reefer und Zeitschritt die Ladeleistung und die Innentemperatur, mit Ankunfts- und Abfahrtszeit je Reefer, Temperaturbereich je Ware und Leistungs- und Stromgrenzen entlang des Netzes (Steckdose, Verteilerkasten, Boxtransformer, Umspannstation).
+Das Ziel sind Kosten: Verbrauch mal stündlicher Preis plus Spitzenkosten in drei Tarifvarianten (Spitze mal Preis; Spitze plus Überschreitung einer vertraglichen Schwelle; nur die Überschreitung). Zwei Ladeschemata: **flexible Leistung** (lineares Programm) und **Ein/Aus** mit fester Leistung (gemischt-ganzzahliges Programm).
+Gerechnet wird mit CPLEX 12.10 auf vier zufällig erzeugten Instanzfamilien zu 100, 250, 500 und 1.000 Reefern über einen Tag, mit Wetter aus Budiyanto und Shinoda (2017), Preisen aus Iris und Lam (2021) und Temperaturbereichen aus van Duin u. a.
+
+**Was die Autoren berichten.** Das Ein/Aus-Programm läuft in allen 28 Läufen (Tabelle 3: vier Instanzen, drei Kostenvarianten, drei Schwellen) bis zum Zeitlimit von 1.800 Sekunden, mit Lücken von 0,77 bis 2,17 % (Mittel 1,17 %), also **ohne Optimalitätsbeweis**; das lineare Programm ist in allen Läufen in unter 3 Sekunden optimal (1,01 bis 2,71 Sekunden). Gegenüber ihrer Basisregel (Hilfsleistung im Temperaturbereich, bei Erreichen der Obergrenze kühlen bis zur Untergrenze)
+verschiebt der Plan das Laden in Stunden mit niedrigem Preis und lädt bei vielen Reefern im Yard intermittierend; alle Reefer bleiben im Temperaturbereich. Flexible Leistung ist besser als Ein/Aus (Energiekosten im Mittel um 12, 30, 92 und 117 SGD je Tag niedriger bei 100 bis 1.000 Reefern).
+Eine Dachbeschattung senkt in der Instanz mit 250 Reefern die Spitze um bis zu 30 kW und den Energiebedarf um mehr als 600 kWh je Tag. Als Nachteil von Ein/Aus nennen die Autoren häufiges Umschalten zwischen Höchst- und Mindestleistung mit stärkeren Temperaturschwankungen und mehr Verschleiß an der Kühlanlage; gemessen wird das im Fließtext nicht.
+Als Grenze nennen sie, dass nur der Reefer-Park betrachtet wird (keine Kräne und Fahrzeuge); weitere Warenanforderungen, Feuchtemessung und bessere Lösungsverfahren für Ein/Aus stehen als künftige Arbeit. Die Instanzen sind zufällig erzeugt, die Daten liegen nur auf Anfrage vor.
+
+**Vergleich mit dieser Demo (eigene Einordnung).**
+
+- **Gleiches Gerüst, andere Frage.** Die Temperaturgleichung hat dieselbe Form (Nebenbedingung (6) der Arbeit, dort mit Verweis auf van Duin u. a. 2018, „Cooling down“, Journal of Cleaner Production 193, 72–86; das ist nicht die hier zitierte Konferenzarbeit „Keep it cool“ und ist hier nicht gelesen, ob die Gleichung dort wörtlich gleich ist, bleibt offen); die Sonne wirkt dort als Faktor (1 + *S*) im Wärmeübergang, hier als Zuschlag auf die Umgebungstemperatur. Die Arbeit minimiert Kosten aus Preis und Spitze über viele Reefer mit Ankunft und Abfahrt;
+  diese Demo fragt nur nach der kleinsten Spitze eines festen Blocks und nach dem Wert einer Reserve über dem Regelband, ohne Preise und Kosten.
+- **Bruchteil und Ein/Aus sind nicht dieselbe Rechnung.** In der Arbeit liegt „aus“ bei der Mindestleistung (Hilfsleistung, nach Tabelle 2 für jede Ware 2,5 kW; Höchstleistung 5 bis 15 kW je Ware) und die flexible Leistung zwischen Mindest- und Höchstleistung; hier ist „aus“ 0 kW und der Bruchteil läuft von 0 bis 1. Die untere Schranke dieser Demo ist deshalb nicht das flexible Programm der Arbeit.
+- **Gleiche Richtung.** In beiden Modellen ist der Bruchteil-Betrieb die Relaxation des Ein/Aus-Betriebs und im Optimum nicht schlechter (Deutung aus den Modellformen, nicht gemessen); die Arbeit nennt den Abstand in Energiekosten, diese Demo misst ihn in Spitze (Tabelle „Befunde“, Zeile zur unteren Schranke). Schaltvorgänge und Verschleiß bewertet die Demo nicht: Das Ziel ist nur die Spitze.
+- **Rechenaufwand.** Der Tab „Exakt“ endet hier bei fünf Reefern (HiGHS im Browser, 30 Sekunden Zeitlimit). Die Arbeit rechnet Ein/Aus bis 1.000 Reefer, aber mit CPLEX, 30 Minuten, anderem Ziel und in allen Läufen ohne Optimalitätsbeweis (Lücken 0,77 bis 2,17 %); die Zeiten sind nicht vergleichbar. In beiden endet der Ein/Aus-Löser bei größeren Instanzen am Zeitlimit (hier bei sechs Reefern in einem von drei Blöcken, siehe „Messungen dieser README“); die Grenze bei fünf ist eine Grenze dieser Demo im Browser, kein Befund über das Problem (Deutung).
+- **Spitzensenkung.** Aus Tabelle 4 der Arbeit berechnet (eigene Rechnung): Mit Ein/Aus und der Kostenvariante „Spitze mal Preis“ liegt die Spitze bei 282,5 / 570,5 / 1.702,5 / 2.086,5 kW gegenüber 438 / 864 / 2.290,5 / 3.277,5 kW bei der Basisregel (100 / 250 / 500 / 1.000 Reefer), also 36 / 34 / 26 / 36 % niedriger. Diese Demo misst 56 % mit 0,25 K Reserve (Tabelle „Befunde“).
+  Die Zahlen sind **nicht vergleichbar**: andere Basisregel (Hysterese statt Thermostat mit Vorausschau), die Arbeit minimiert Kosten statt Spitze, mit Ankünften und Abgängen und Preisen, und ihre Reserve und Startwerte sind im Text nicht genannt.
+- **Leistungswerte.** Tabelle 2 nennt (nach van Duin u. a. 2018) 5 bis 15 kW Höchstleistung je Ware; die 10 und 8 kW dieser Demo liegen in diesem Bereich. Das ersetzt keine Kalibrierung (siehe „Ehrliche Grenzen“).
 
 ## Befunde und Korrekturen gegenüber dem Plan
 
@@ -112,7 +138,7 @@ Die Spalte „Test“ nennt die Funktion in `tests/test_claims.py` (Band oder ex
 ## Bewusst nicht umgesetzt
 
 - **Stellplatzkosten nach Sonne und Stapelebene** (siehe oben): die Datenlage reicht dafür nicht.
-- **Ankünfte und Abgänge im Tagesverlauf, Strompreisverlauf (Lastverschiebung), mehrere Blöcke an einem Netzanschluss:** eigene Fragen; Tang u. a. (International Journal of Production Research 2025) behandeln Ladeplanung mit Preisen und Spitzenkappung, hier nur dem Abstract nach bekannt und nicht nachgebaut.
+- **Ankünfte und Abgänge im Tagesverlauf, Strompreisverlauf (Lastverschiebung), mehrere Blöcke an einem Netzanschluss:** eigene Fragen; Tang u. a. (International Journal of Production Research 2025) behandeln alle drei (Ladeplanung mit stündlichen Preisen, Spitzenkosten, Ankunfts- und Abfahrtszeiten, Netz aus Verteilerkästen und Transformatoren), hier nicht nachgebaut; Einordnung im Abschnitt „Einordnung: Tang u. a. (2025)“.
 - **Kostenrechnung:** ein Tag ersetzt kein Monatsmaximum; ohne Tarif gäbe es nur eine erfundene Zahl.
 
 ## Lokal ausführen

@@ -347,6 +347,7 @@ $$\\min\\; \\Pi \\quad \\text{mit} \\quad \\sum_i P_i\\,u_{i,t} \\le \\Pi \\quad
 
 Mit u_{i,t} ∈ [0, 1] statt {0, 1} ist es ein lineares Programm und liefert die untere Schranke; mit u_{i,t} ∈ {0, 1} ist es das gemischt-ganzzahlige Programm des Tabs „Exakt“.
 Die Form der Temperaturgleichung folgt Gleichung (1) von van Duin u. a. (Keep it cool, TRB 2017) für die Erwärmung ohne Strom; die Zahlenwerte stammen nicht aus dieser Arbeit.
+Dieselbe Form steht als Nebenbedingung (6) bei Tang u. a. (2025, International Journal of Production Research 63(20), 7460–7485), dort mit der Sonne als Faktor auf den Wärmeübergang statt als Zuschlag auf die Umgebungstemperatur.
 """
     )
 
