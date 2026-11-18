@@ -22,7 +22,7 @@ Ohne Kühlung relaxiert die Temperatur zur Umgebung, mit Kühlung sinkt sie um e
 *T*(t+1) = *a*·*T*(t) + (1 − *a*)·*A*(t) − *b*·*u*(t),  *a* = exp(−Δt/τ),  *b* = Kühlrate·Δt,
 
 *u* ∈ {0, 1} ist „bekommt Strom und kühlt“, *A* die Umgebung (Tagesmittel ohne Sonnenzuschlag, ±5 K Tagesgang mit Spitze um 15 Uhr, Sonnenzuschlag als Halbsinus zwischen 6 und 18 Uhr). Die Form folgt Gleichung (1) von van Duin u. a. für die
-Erwärmung ohne Strom; **die Zahlenwerte sind eigene Annahmen** (siehe „Ehrliche Grenzen“). Zwei Klassen: gefroren (Sollwert −20 °C, 10 kW bei Betrieb) und gekühlt (+2 °C, 8 kW). Zeitkonstanten, Kühlraten und Starttemperaturen
+Erwärmung ohne Strom (dort wirkt die Sonne als Faktor im Wärmeübergang, hier als Zuschlag auf die Umgebung); **die Zahlenwerte sind eigene Annahmen** (siehe „Ehrliche Grenzen“). Zwei Klassen: gefroren (Sollwert −20 °C, 10 kW bei Betrieb) und gekühlt (+2 °C, 8 kW). Zeitkonstanten, Kühlraten und Starttemperaturen
 sind je Reefer aus dem Zufalls-Seed gezogen; ein einstellbarer Anteil startet genau am oberen Rand des Regelbands (etwa nach dem Anlanden). Formal im Expander „📐 Mathematische Formulierung“.
 
 ## Methodik – drei Regeln, eine Schranke, ein exakter Plan
@@ -90,7 +90,8 @@ Als Grenze nennen sie, dass nur der Reefer-Park betrachtet wird (keine Kräne un
 
 **Vergleich mit dieser Demo (eigene Einordnung).**
 
-- **Gleiches Gerüst, andere Frage.** Die Temperaturgleichung hat dieselbe Form (Nebenbedingung (6) der Arbeit, dort mit Verweis auf van Duin u. a. 2018, „Cooling down“, Journal of Cleaner Production 193, 72–86; das ist nicht die hier zitierte Konferenzarbeit „Keep it cool“ und ist hier nicht gelesen, ob die Gleichung dort wörtlich gleich ist, bleibt offen); die Sonne wirkt dort als Faktor (1 + *S*) im Wärmeübergang, hier als Zuschlag auf die Umgebungstemperatur. Die Arbeit minimiert Kosten aus Preis und Spitze über viele Reefer mit Ankunft und Abfahrt;
+- **Gleiches Gerüst, andere Frage.** Die Temperaturgleichung hat dieselbe Form (Nebenbedingung (6) der Arbeit; sie verweist dafür auf van Duin u. a. 2018, „Cooling down“, Journal of Cleaner Production 193, 72–86, das ich im Volltext gelesen habe: Dort ist Formel (1) der Temperaturanstieg ohne Strom, Fläche, Isolierwert, Sonnenanteil *S*, Masse und spezifische Wärme der Ware im Exponenten, nach Tran 2012; die Zeichen der PDF-Textextraktion waren teils verstümmelt, die Klammer (1 + *S*) ist aus dem Zusammenhang gelesen).
+  Die Sonne wirkt in beiden Arbeiten als Faktor (1 + *S*) im Wärmeübergang, hier als Zuschlag auf die Umgebungstemperatur. Die Arbeit minimiert Kosten aus Preis und Spitze über viele Reefer mit Ankunft und Abfahrt;
   diese Demo fragt nur nach der kleinsten Spitze eines festen Blocks und nach dem Wert einer Reserve über dem Regelband, ohne Preise und Kosten.
 - **Bruchteil und Ein/Aus sind nicht dieselbe Rechnung.** In der Arbeit liegt „aus“ bei der Mindestleistung (Hilfsleistung, nach Tabelle 2 für jede Ware 2,5 kW; Höchstleistung 5 bis 15 kW je Ware) und die flexible Leistung zwischen Mindest- und Höchstleistung; hier ist „aus“ 0 kW und der Bruchteil läuft von 0 bis 1. Die untere Schranke dieser Demo ist deshalb nicht das flexible Programm der Arbeit.
 - **Gleiche Richtung.** In beiden Modellen ist der Bruchteil-Betrieb die Relaxation des Ein/Aus-Betriebs und im Optimum nicht schlechter (Deutung aus den Modellformen, nicht gemessen); die Arbeit nennt den Abstand in Energiekosten, diese Demo misst ihn in Spitze (Tabelle „Befunde“, Zeile zur unteren Schranke). Schaltvorgänge und Verschleiß bewertet die Demo nicht: Das Ziel ist nur die Spitze.
