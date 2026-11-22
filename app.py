@@ -75,7 +75,7 @@ st.markdown(
     """
 Kühlcontainer (**Reefer**) im Block brauchen Strom, und viele Stromversorger rechnen nach der **höchsten Spitze** ab. Kühlen viele Reefer zugleich, etwa nach dem Anlanden, entsteht eine hohe Spitze.
 Die Demo fragt: **Wie weit lässt sich die Spitze senken, ohne dass die Ware wärmer wird, als es sicher ist, und welche Regel für den Strom holt wie viel davon heraus?**
-Verglichen werden drei Regeln (**ungesteuert**, **Strom reihum**, **Leistungsgrenze**) mit der **unteren Schranke** und, für kleine Blöcke, dem **exakten Plan**.
+Verglichen werden drei Regeln (**ungesteuert**, **Strom reihum**, **Leistungsgrenze**) mit der **unteren Schranke** (Lower Bound) und, für kleine Blöcke, dem **exakten Plan**.
 
 Weiter unten: die **Kernfrage**, zwei **Experimente** (Reserve; Gruppen und Slotlänge) und die Expander **🔧 Wie wir das erreichen – vollständiger Methodenvergleich** und **📐 Mathematische Formulierung**.
 Welche Reefer wohin kommen, zeigt die [Reefer-Demo zum Steckdosen-Puffer](https://sebastianhanisch-reefer-demo.streamlit.app/); hier stehen die Reefer schon am Strom.

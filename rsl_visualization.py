@@ -41,8 +41,8 @@ def build_power(a):
     fig.add_trace(go.Scatter(x=span, y=[a.cap_kw] * 2, mode="lines", line=dict(color=C.COLOR_RULES["grenze"], width=1.5, dash="dash"), name="eingestellte Grenze",
                              hovertemplate="Grenze: %{y:.1f} kW<extra></extra>"))
     if a.lp.peak_kw is not None:
-        fig.add_trace(go.Scatter(x=span, y=[a.lp.peak_kw] * 2, mode="lines", line=dict(color=C.COLOR_BOUND, width=1.5, dash="dot"), name="Untergrenze (Bruchteile)",
-                                 hovertemplate="Untergrenze: %{y:.1f} kW<extra></extra>"))
+        fig.add_trace(go.Scatter(x=span, y=[a.lp.peak_kw] * 2, mode="lines", line=dict(color=C.COLOR_BOUND, width=1.5, dash="dot"), name="Untere Schranke (Bruchteile)",
+                                 hovertemplate="Untere Schranke: %{y:.1f} kW<extra></extra>"))
     _clock_axis(fig)
     fig.update_yaxes(title_text="Leistung des Blocks (kW)", rangemode="tozero")
     return _base(fig, 400)
@@ -78,7 +78,7 @@ def build_margin(rows):
                              name="ohne Steuerung (Median)", hovertemplate="Reserve %{x:.2f} K: %{y:.1f} kW<extra></extra>"))
     lp_rows = [r for r in rows if r["lp"] is not None]
     fig.add_trace(go.Scatter(x=[r["margin"] for r in lp_rows], y=[r["lp"] for r in lp_rows], mode="lines+markers", line=dict(color=C.COLOR_BOUND, width=2, dash="dot"),
-                             name="Untergrenze mit Bruchteilen (eingestellte Instanz)", hovertemplate="Reserve %{x:.2f} K: %{y:.1f} kW<extra></extra>"))
+                             name="Untere Schranke mit Bruchteilen (eingestellte Instanz)", hovertemplate="Reserve %{x:.2f} K: %{y:.1f} kW<extra></extra>"))
     fig.update_xaxes(title_text="Reserve über dem Regelband (K)")
     fig.update_yaxes(title_text="Spitze (kW)", rangemode="tozero")
     return _base(fig)
