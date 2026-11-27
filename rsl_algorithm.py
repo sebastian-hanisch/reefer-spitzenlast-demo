@@ -205,7 +205,7 @@ def exact_peak(inst: Instance, *, integer: bool, time_limit_s: float | None = No
     cost[-1] = 1.0
     bounds = Bounds(np.zeros(n * steps + 1), np.concatenate([np.ones(n * steps), [inst.total_power_kw]]))
     integrality = np.concatenate([np.ones(n * steps) if integer else np.zeros(n * steps), [0]])
-    options = {"presolve": True}
+    options = {"presolve": True, "mip_rel_gap": 0.0}
     if time_limit_s is not None:
         options["time_limit"] = float(time_limit_s)
     res = milp(cost, constraints=LinearConstraint(a_mat, lo_vec, hi_vec), bounds=bounds, integrality=integrality, options=options)
